@@ -236,7 +236,7 @@ function openAdminPanel(panel) {
   $$(".admin-panel").forEach(item => item.classList.remove("active"));
   $(`#${panel}Panel`).classList.add("active");
   $$("[data-admin-panel]").forEach(button => button.classList.toggle("active", button.dataset.adminPanel === panel && button.closest(".admin-sidebar")));
-  const titles = { overview: "Good morning, Amelia.", editor: "Create something delicious.", recipes: "Your recipe library.", categories: "Keep your recipes organised." };
+  const titles = { overview: "Good morning, Admin.", editor: "Create something delicious.", recipes: "Your recipe library.", categories: "Keep your recipes organised." };
   $("#adminTitle").textContent = titles[panel];
   $(".admin-sidebar").classList.remove("open");
   window.scrollTo({ top: 0, behavior: "smooth" });
