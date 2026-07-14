@@ -12,6 +12,7 @@ let categories = loadCategories();
 let activeFilter = "All";
 let searchTerm = "";
 let toastTimer;
+let uploadedImage = "";
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -54,6 +55,7 @@ function escapeHTML(value = "") {
 }
 
 function safeImageUrl(value) {
+  if (typeof value === "string" && value.startsWith("data:image/")) return value;
   try {
     const url = new URL(value);
     return ["https:", "http:"].includes(url.protocol) ? url.href : fallbackImage;
@@ -61,6 +63,29 @@ function safeImageUrl(value) {
     return fallbackImage;
   }
 }
+
+function compressImageFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Unable to read that image."));
+    reader.onload = () => {
+      const image = new Image();
+      image.onerror = () => reject(new Error("That file is not a readable image."));
+      image.onload = () => {
+        const maxSize = 1400;
+        const scale = Math.min(1, maxSize / Math.max(image.naturalWidth, image.naturalHeight));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", 0.82));
+      };
+      image.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 
 function refreshRecipes() {
   recipes = [...customRecipes, ...starterRecipes];
@@ -277,7 +302,7 @@ function updatePreview() {
   const category = $("#recipeCategory").value;
   const time = $("#recipeTime").value.trim() || "45 min";
   const description = $("#recipeDescription").value.trim() || "Your short recipe introduction will appear here.";
-  const image = safeImageUrl($("#recipeImage").value.trim());
+  const image = uploadedImage || safeImageUrl($("#recipeImage").value.trim());
   $("#previewTitle").textContent = title;
   $("#previewCategory").textContent = category;
   $("#previewTime").textContent = time;
@@ -298,7 +323,7 @@ function publishRecipe(event) {
     time: $("#recipeTime").value.trim(),
     servings: Number($("#recipeServings").value),
     description: $("#recipeDescription").value.trim().slice(0, 220),
-    image: safeImageUrl($("#recipeImage").value.trim()),
+    image: uploadedImage || safeImageUrl($("#recipeImage").value.trim()),
     featured: false,
     saves: 0,
     custom: true,
@@ -308,6 +333,10 @@ function publishRecipe(event) {
   saveCustomRecipes();
   refreshRecipes();
   form.reset();
+  uploadedImage = "";
+  $("#selectedImageName").textContent = "JPG, PNG, or WEBP · up to 10 MB";
+  $("#imageError").textContent = "Images are compressed in your browser before saving.";
+  $("#imageError").classList.remove("has-error");
   $("#recipeServings").value = 4;
   updatePreview();
   openAdminPanel("recipes");
@@ -447,6 +476,42 @@ $("#logoutButton").addEventListener("click", () => {
 $(".admin-menu-toggle").addEventListener("click", () => $(".admin-sidebar").classList.toggle("open"));
 $("#recipeForm").addEventListener("submit", publishRecipe);
 $$('#recipeForm input, #recipeForm select, #recipeForm textarea').forEach(input => input.addEventListener("input", updatePreview));
+$("#recipeImageFile").addEventListener("change", async event => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  const error = $("#imageError");
+  if (!file.type.startsWith("image/")) {
+    error.textContent = "Please choose an image file.";
+    error.classList.add("has-error");
+    event.target.value = "";
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    error.textContent = "That image is larger than 10 MB. Choose a smaller file.";
+    error.classList.add("has-error");
+    event.target.value = "";
+    return;
+  }
+  try {
+    uploadedImage = await compressImageFile(file);
+    $("#selectedImageName").textContent = `${file.name} · ready to use`;
+    error.textContent = "Image selected and compressed for browser storage.";
+    error.classList.remove("has-error");
+    updatePreview();
+    showToast("Image added", "Your device image is ready for this recipe.");
+  } catch (imageError) {
+    uploadedImage = "";
+    error.textContent = imageError.message;
+    error.classList.add("has-error");
+  }
+});
+$("#recipeImage").addEventListener("input", event => {
+  if (event.target.value.trim()) {
+    uploadedImage = "";
+    $("#selectedImageName").textContent = "Using the pasted image URL";
+  }
+  updatePreview();
+});
 
 $("#quickRecipeForm").addEventListener("submit", event => {
   event.preventDefault();
