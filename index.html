@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Savor & Story — seasonal recipes, thoughtful cooking, and beautiful food for everyday tables.">
+  <title>Savor & Story — Seasonal Food Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4V4.5Z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-recipes" viewBox="0 0 24 24"><path d="M6 3h12a2 2 0 0 1 2 2v16H7a3 3 0 0 1-3-3V5a2 2 0 0 1 2-2Z"/><path d="M7 17h13M8 7h8M8 11h5"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 9 19.37a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.63 15 1.7 1.7 0 0 0 3.08 14H3v-4h.08A1.7 1.7 0 0 0 4.63 9a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.63h.01A1.7 1.7 0 0 0 10 3.08V3h4v.08A1.7 1.7 0 0 0 15 4.63a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.37 9v.01A1.7 1.7 0 0 0 20.92 10H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5M14 8l4 4-4 4M8 12h10"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 14v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 14h8l1-14M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </svg>
+
+  <div id="homeView" class="app-view active">
+    <header class="site-header compact-header">
+      <a class="brand" href="#recipes" aria-label="Savor and Story recipes">
+        <span class="brand-mark">S</span>
+        <span class="brand-copy">Savor <i>&</i> Story<small>My recipe collection</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a class="active" href="#recipes">Recipes</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button search-toggle" type="button" aria-label="Search recipes"><svg><use href="#i-search"/></svg></button>
+        <button class="admin-link" type="button" data-view-target="login"><svg><use href="#i-user"/></svg>Admin</button>
+        <button class="icon-button mobile-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+      </div>
+
+      <div class="search-panel" role="search">
+        <svg><use href="#i-search"/></svg>
+        <input id="siteSearch" type="search" placeholder="Search recipes…" aria-label="Search recipes">
+        <button class="search-close" type="button" aria-label="Close search"><svg><use href="#i-close"/></svg></button>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="#recipes">Recipes</a>
+        <button type="button" data-view-target="login">Admin sign in <svg><use href="#i-arrow"/></svg></button>
+      </nav>
+    </header>
+
+    <main class="compact-main">
+      <section class="section latest-section compact-recipes" id="recipes">
+        <div class="compact-intro">
+          <div>
+            <span class="eyebrow">Recipe collection</span>
+            <h1>From my <em>kitchen.</em></h1>
+            <p>A simple home for the recipes I want to keep and share.</p>
+          </div>
+          <button class="button button-dark" type="button" data-view-target="login"><svg><use href="#i-plus"/></svg>Add a recipe</button>
+        </div>
+
+        <div class="recipe-toolbar">
+          <div class="filter-row" id="filterRow" aria-label="Filter recipes">
+            <button class="active" type="button" data-filter="All">All recipes</button>
+          </div>
+        </div>
+
+        <div class="recipe-grid" id="recipeGrid"></div>
+        <div class="empty-state collection-empty" id="emptyState" hidden>
+          <span>Your recipe collection is empty.</span>
+          <p>Sign in to the kitchen dashboard and publish your first recipe.</p>
+          <button class="button button-dark" type="button" data-view-target="login"><svg><use href="#i-plus"/></svg>Add your first recipe</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer compact-footer">
+      <a class="brand brand-light" href="#recipes"><span class="brand-mark">S</span><span class="brand-copy">Savor <i>&</i> Story<small>My recipe collection</small></span></a>
+      <p>Recipes collected with care.</p>
+      <button type="button" data-view-target="login">Admin sign in <svg><use href="#i-arrow"/></svg></button>
+      <span>© 2026 Savor & Story</span>
+    </footer>
+  </div>
+
+  <div id="loginView" class="app-view">
+    <main class="login-page">
+      <section class="login-visual">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=88" alt="Beautiful bowl of seasonal vegetables">
+        <div class="login-overlay">
+          <a class="brand brand-light" href="#home" data-view-target="home"><span class="brand-mark">S</span><span class="brand-copy">Savor <i>&</i> Story<small>Seasonal food journal</small></span></a>
+          <blockquote>“A recipe has no soul. You, as the cook, must bring soul to the recipe.”</blockquote>
+          <span>— Thomas Keller</span>
+        </div>
+      </section>
+      <section class="login-panel">
+        <button class="back-button" type="button" data-view-target="home"><svg><use href="#i-arrow"/></svg> Back to website</button>
+        <div class="login-card">
+          <div class="login-mobile-brand"><span class="brand-mark">S</span><strong>Savor <i>&</i> Story</strong></div>
+          <span class="eyebrow">Kitchen access</span>
+          <h1>Welcome back.</h1>
+          <p>Sign in to publish recipes and manage the journal.</p>
+          <form id="loginForm" novalidate>
+            <label for="loginEmail">Email address</label>
+            <input id="loginEmail" type="email" autocomplete="username" placeholder="admin@savorandstory.com" required>
+            <label for="loginPassword">Password</label>
+            <div class="password-field">
+              <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+              <button id="passwordToggle" type="button" aria-label="Show password"><svg><use href="#i-eye"/></svg></button>
+            </div>
+            <div class="login-options"><label class="check-label"><input id="rememberMe" type="checkbox"><span></span> Remember me</label><button type="button" id="forgotPassword">Forgot password?</button></div>
+            <p class="form-error" id="loginError" role="alert"></p>
+            <button class="button button-dark login-submit" type="submit">Sign in to dashboard <svg><use href="#i-arrow"/></svg></button>
+          </form>
+          <div class="demo-credentials"><span>Demo access</span><button type="button" id="fillDemo">admin@savorandstory.com <strong>•</strong> savor123</button></div>
+        </div>
+        <small class="login-footer">Protected kitchen access · Savor & Story © 2026</small>
+      </section>
+    </main>
+  </div>
+
+  <div id="adminView" class="app-view">
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <a class="admin-brand" href="#dashboard" aria-label="Savor and Story dashboard"><span class="brand-mark">S</span><span><strong>Savor <i>&</i> Story</strong><small>Kitchen studio</small></span></a>
+        <nav>
+          <span>Workspace</span>
+          <button class="active" type="button" data-admin-panel="overview"><svg><use href="#i-grid"/></svg> Overview</button>
+          <button type="button" data-admin-panel="editor"><svg><use href="#i-plus"/></svg> Add recipe</button>
+          <button type="button" data-admin-panel="recipes"><svg><use href="#i-recipes"/></svg> All recipes <span id="sidebarRecipeCount">0</span></button>
+          <button type="button" data-admin-panel="categories"><svg><use href="#i-settings"/></svg> Categories <span id="sidebarCategoryCount">0</span></button>
+          <span>Account</span>
+          <button type="button" data-admin-panel="settings"><svg><use href="#i-settings"/></svg> Settings</button>
+        </nav>
+        <div class="admin-user">
+          <span>AR</span><div><strong>Amelia Reed</strong><small>Administrator</small></div>
+          <button type="button" id="logoutButton" aria-label="Sign out"><svg><use href="#i-logout"/></svg></button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <button class="admin-menu-toggle" type="button" aria-label="Toggle admin menu"><svg><use href="#i-menu"/></svg></button>
+          <div><span id="adminDate">Tuesday, 14 July</span><h1 id="adminTitle">Good morning, Amelia.</h1></div>
+          <div class="admin-header-actions"><button class="preview-site" type="button" data-view-target="home"><svg><use href="#i-eye"/></svg> View site</button><button class="button button-dark" type="button" data-admin-panel="editor"><svg><use href="#i-plus"/></svg> New recipe</button></div>
+        </header>
+
+        <section class="admin-panel active" id="overviewPanel">
+          <div class="metric-grid">
+            <article><span class="metric-icon green"><svg><use href="#i-recipes"/></svg></span><div><small>Total recipes</small><strong id="totalRecipesMetric">0</strong><em>Ready to grow</em></div></article>
+            <article><span class="metric-icon terracotta"><svg><use href="#i-eye"/></svg></span><div><small>Monthly readers</small><strong>0</strong><em>New collection</em></div></article>
+            <article><span class="metric-icon ochre"><svg><use href="#i-bookmark"/></svg></span><div><small>Recipe saves</small><strong id="totalSavesMetric">0</strong><em>Nothing saved yet</em></div></article>
+          </div>
+          <div class="admin-grid">
+            <section class="admin-card quick-publish">
+              <div class="card-heading"><div><span>Quick publish</span><h2>Share something delicious</h2></div><span class="tiny-badge">Draft</span></div>
+              <form id="quickRecipeForm">
+                <label for="quickTitle">Recipe title</label><input id="quickTitle" type="text" placeholder="e.g. Charred peach & burrata salad" required>
+                <div class="form-row"><div><label for="quickCategory">Category</label><select id="quickCategory"></select></div><div><label for="quickTime">Prep + cook</label><input id="quickTime" type="text" placeholder="35 min" required></div></div>
+                <button class="button button-dark" type="submit">Continue in editor <svg><use href="#i-arrow"/></svg></button>
+              </form>
+            </section>
+            <section class="admin-card recent-card">
+              <div class="card-heading"><div><span>Recent activity</span><h2>Latest recipes</h2></div><button type="button" data-admin-panel="recipes">View all</button></div>
+              <div id="recentAdminRecipes" class="admin-recipe-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="editorPanel">
+          <div class="panel-title"><div><span class="eyebrow">Recipe editor</span><h2>Create a new recipe</h2><p>Add the essentials now. You can refine the story any time.</p></div><button class="text-button" type="button" data-admin-panel="overview">Cancel</button></div>
+          <form id="recipeForm" class="recipe-editor">
+            <div class="editor-fields admin-card">
+              <div class="field-group"><label for="recipeTitle">Recipe title <span>*</span></label><input id="recipeTitle" type="text" placeholder="Give your recipe a memorable name" required></div>
+              <div class="form-row thirds"><div><label for="recipeCategory">Category</label><select id="recipeCategory"></select></div><div><label for="recipeTime">Total time</label><input id="recipeTime" type="text" placeholder="45 min" required></div><div><label for="recipeServings">Serves</label><input id="recipeServings" type="number" min="1" max="24" value="4" required></div></div>
+              <div class="field-group"><label for="recipeDescription">Short description</label><textarea id="recipeDescription" rows="5" placeholder="What makes this recipe special?" required></textarea><small><span id="descriptionCount">0</span>/220 characters</small></div>
+              <div class="field-group"><label for="recipeImage">Cover image URL</label><div class="url-field"><svg><use href="#i-upload"/></svg><input id="recipeImage" type="url" placeholder="https://images.unsplash.com/…"></div><small>Paste a direct image URL. A seasonal placeholder is used if left blank.</small></div>
+            </div>
+            <aside class="editor-preview">
+              <span>Live preview</span>
+              <article class="preview-recipe-card">
+                <div><img id="previewImage" src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80" alt="Recipe preview"><span id="previewCategory">Vegetarian</span></div>
+                <small><svg><use href="#i-clock"/></svg> <span id="previewTime">45 min</span></small>
+                <h3 id="previewTitle">Your recipe title</h3>
+                <p id="previewDescription">Your short recipe introduction will appear here.</p>
+              </article>
+              <button class="button button-dark publish-button" type="submit"><svg><use href="#i-check"/></svg> Publish recipe</button>
+              <small class="publish-note">Publishing adds this recipe to the public recipe collection.</small>
+            </aside>
+          </form>
+        </section>
+
+        <section class="admin-panel" id="recipesPanel">
+          <div class="panel-title"><div><span class="eyebrow">Recipe library</span><h2>All recipes</h2><p>Review what’s published in your journal.</p></div><button class="button button-dark" type="button" data-admin-panel="editor"><svg><use href="#i-plus"/></svg> Add recipe</button></div>
+          <div class="admin-card recipe-table-wrap"><table class="recipe-table"><thead><tr><th>Recipe</th><th>Category</th><th>Time</th><th>Status</th><th></th></tr></thead><tbody id="recipeTableBody"></tbody></table></div>
+        </section>
+
+        <section class="admin-panel" id="categoriesPanel">
+          <div class="panel-title"><div><span class="eyebrow">Recipe setup</span><h2>Categories</h2><p>Create and organise the categories used across your recipes and filters.</p></div></div>
+          <div class="category-manager">
+            <section class="admin-card category-list-card">
+              <div class="card-heading"><div><span>Your categories</span><h2>Manage categories</h2></div><small id="categoryUsageNote">0 categories</small></div>
+              <div id="adminCategoryList" class="admin-category-list"></div>
+            </section>
+            <aside class="admin-card category-add-card">
+              <span>Add category</span>
+              <h3>Keep it organised.</h3>
+              <p>New categories appear instantly in the recipe editor and public filters.</p>
+              <form id="categoryForm">
+                <label for="newCategoryName">Category name</label>
+                <input id="newCategoryName" type="text" maxlength="32" placeholder="e.g. Breakfast" required>
+                <p class="form-error" id="categoryError" role="alert"></p>
+                <button class="button button-dark" type="submit"><svg><use href="#i-plus"/></svg>Add category</button>
+              </form>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal" id="recipeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalRecipeTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <article class="recipe-modal-card">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close recipe"><svg><use href="#i-close"/></svg></button>
+      <img id="modalRecipeImage" src="" alt="">
+      <div class="modal-copy"><span id="modalRecipeCategory" class="eyebrow"></span><h2 id="modalRecipeTitle"></h2><div class="modal-meta"><span><svg><use href="#i-clock"/></svg><b id="modalRecipeTime"></b></span><span>Serves <b id="modalRecipeServings"></b></span></div><p id="modalRecipeDescription"></p><button class="button button-dark" type="button" data-close-modal>Back to recipes <svg><use href="#i-arrow"/></svg></button></div>
+    </article>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span><svg><use href="#i-check"/></svg></span><div><strong id="toastTitle">Done</strong><small id="toastMessage">Your changes have been saved.</small></div></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
