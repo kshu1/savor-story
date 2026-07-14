@@ -413,12 +413,12 @@ $("#loginForm").addEventListener("submit", event => {
   event.preventDefault();
   const email = $("#loginEmail").value.trim().toLowerCase();
   const password = $("#loginPassword").value;
-  if (email === "admin@savorandstory.com" && password === "savor123") {
+  if (email === "admin" && password === "prasadam123") {
     sessionStorage.setItem(SESSION_KEY, "true");
     $("#loginError").textContent = "";
     showView("admin");
     openAdminPanel("overview");
-    showToast("Welcome back, Amelia", "Your kitchen dashboard is ready.");
+    showToast("Welcome back, Admin", "Your kitchen dashboard is ready.");
   } else {
     $("#loginError").textContent = "That email or password doesn’t match the demo access.";
     $("#loginPassword").focus();
@@ -426,8 +426,8 @@ $("#loginForm").addEventListener("submit", event => {
 });
 
 $("#fillDemo").addEventListener("click", () => {
-  $("#loginEmail").value = "admin@savorandstory.com";
-  $("#loginPassword").value = "savor123";
+  $("#loginEmail").value = "admin";
+  $("#loginPassword").value = "prasadam123";
   $("#loginError").textContent = "";
 });
 
