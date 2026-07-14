@@ -185,7 +185,18 @@
               <div class="field-group"><label for="recipeTitle">Recipe title <span>*</span></label><input id="recipeTitle" type="text" placeholder="Give your recipe a memorable name" required></div>
               <div class="form-row thirds"><div><label for="recipeCategory">Category</label><select id="recipeCategory"></select></div><div><label for="recipeTime">Total time</label><input id="recipeTime" type="text" placeholder="45 min" required></div><div><label for="recipeServings">Serves</label><input id="recipeServings" type="number" min="1" max="24" value="4" required></div></div>
               <div class="field-group"><label for="recipeDescription">Short description</label><textarea id="recipeDescription" rows="5" placeholder="What makes this recipe special?" required></textarea><small><span id="descriptionCount">0</span>/220 characters</small></div>
-              <div class="field-group"><label for="recipeImage">Cover image URL</label><div class="url-field"><svg><use href="#i-upload"/></svg><input id="recipeImage" type="url" placeholder="https://images.unsplash.com/…"></div><small>Paste a direct image URL. A seasonal placeholder is used if left blank.</small></div>
+                            <div class="field-group image-field">
+                <label>Cover image</label>
+                <label class="device-image-picker" for="recipeImageFile">
+                  <span class="device-image-icon"><svg><use href="#i-upload"/></svg></span>
+                  <span><strong>Choose an image from your device</strong><small id="selectedImageName">JPG, PNG, or WEBP · up to 10 MB</small></span>
+                  <svg class="picker-arrow"><use href="#i-arrow"/></svg>
+                </label>
+                <input id="recipeImageFile" type="file" accept="image/*" hidden>
+                <p class="image-or">or paste a public image URL</p>
+                <div class="url-field"><svg><use href="#i-upload"/></svg><input id="recipeImage" type="url" placeholder="https://images.unsplash.com/…"></div>
+                <small id="imageError" class="image-error" role="alert">Images are compressed in your browser before saving.</small>
+              </div>
             </div>
             <aside class="editor-preview">
               <span>Live preview</span>
