@@ -301,6 +301,17 @@ h1 em, h2 em { color: var(--terracotta); font-weight: 400; }
 .url-field { position: relative; }
 .url-field svg { position: absolute; z-index: 1; top: 15px; left: 14px; width: 17px; color: var(--muted); }
 .url-field input { padding-left: 42px; }
+.device-image-picker { min-height: 74px; margin: 0 !important; padding: 13px 14px; display: flex !important; align-items: center; gap: 12px; border: 1px dashed #c9c3b8; background: #fbfaf6; cursor: pointer; }
+.device-image-picker:hover { border-color: var(--forest); background: #f4f7f1; }
+.device-image-icon { width: 34px; height: 34px; display: grid; place-items: center; color: var(--forest); border-radius: 50%; background: #dfe8df; }
+.device-image-icon svg { width: 16px; }
+.device-image-picker > span:nth-child(2) { display: flex; flex: 1; flex-direction: column; gap: 4px; }
+.device-image-picker strong { color: var(--ink); font-size: 10px; }
+.device-image-picker small { color: var(--muted); font-size: 8px; }
+.picker-arrow { width: 16px; color: var(--terracotta); }
+.image-or { margin: 12px 0 8px; color: #969c98; font-size: 8px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+.image-field > small.image-error { margin-top: 7px; display: block; color: #969c98; font-size: 8px; text-align: left; }
+.image-field > small.image-error.has-error { color: #a33a29; }
 .feature-toggle { margin: 8px 0 0 !important; padding: 16px; display: flex !important; align-items: center; gap: 13px; border: 1px solid #e4e0d7; background: #fbfaf6; cursor: pointer; }
 .feature-toggle > span { position: relative; width: 36px; height: 20px; border-radius: 20px; background: #c9cdc9; transition: .2s; }
 .feature-toggle > span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: white; transition: .2s; }
